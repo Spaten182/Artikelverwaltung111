@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import Artikelverwaltung.Modell.*;
+import Artikelverwaltung.View.View;
 
 /**
  * @author nils743
@@ -17,12 +18,16 @@ public class Main {
 	/**
 	 * @param args
 	 * @throws IOException 
+	 * @throws InterruptedException 
 	 */
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException{
 		AArticle art = new Article("4", "4", 4, 6.0, 6.0);
+		
 		System.out.println("---------- Test ------------\n");
 		ArrayList<AArticle> list = new ArrayList<AArticle>();
 		
+		
+		View viewMain = new View(); 
 		list = DAOText.readAll();
 		listToConsole(list);	
 	}
