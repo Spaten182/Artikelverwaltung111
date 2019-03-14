@@ -1,5 +1,8 @@
 package Artikelverwaltung.View;
 
+import Artikelverwaltung.Controller.MainController;
+import Artikelverwaltung.Modell.AArticle;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -12,12 +15,14 @@ package Artikelverwaltung.View;
  */
 public class ViewMain extends javax.swing.JFrame {
 
+	private MainController mainCon;
+	
     /**
      * Creates new form View
      */
     public ViewMain() {
+    	this.mainCon = new MainController(this);
         initComponents();
-        mainController mainCon = new MainController();
     }
 
     /**
@@ -65,6 +70,9 @@ public class ViewMain extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        
+        refreshTable();
+        
         jScrollPane1.setViewportView(jTable1);
 
         editButton.setText("Edit");
@@ -112,6 +120,21 @@ public class ViewMain extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+	private void refreshTable() {
+		
+		jTable1.removeAll();
+		
+		int i = 0;
+        for (AArticle element : this.mainCon.getDBData()) {
+        	jTable1.setValueAt(element.getArticleNr(), i, 0);
+        	jTable1.setValueAt(element.getName(), i, 1);
+        	jTable1.setValueAt(element.getAmount(), i, 2);
+        	jTable1.setValueAt(element.getPriceBuy(), i, 3);
+        	jTable1.setValueAt(element.getPriceSell(), i, 4);
+        	i++;
+		}
+	}
 
     /**
      * @param args the command line arguments
