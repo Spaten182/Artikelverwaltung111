@@ -3,8 +3,8 @@ package Artikelverwaltung.Controller;
 import java.util.List;
 
 import Artikelverwaltung.Modell.AArticle;
-import Artikelverwaltung.Modell.DAOText;
-import Artikelverwaltung.Modell.IDAO;
+import DAO.DAOFactory;
+import DAO.IDAO;
 
 public abstract class AController {
 
@@ -14,7 +14,7 @@ public abstract class AController {
 
 	public AController(javax.swing.JFrame view) {
 		this.ownView = view;
-		this.dao = new DAOText();
+		this.dao = DAOFactory.createDAO();
 	}
 	
 	public List<AArticle> getDBData() {

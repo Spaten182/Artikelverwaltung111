@@ -1,6 +1,9 @@
-package Artikelverwaltung.Modell;
+package DAO;
 
 import java.util.List;
+
+import Artikelverwaltung.Modell.AArticle;
+import Artikelverwaltung.Modell.Article;
 
 public interface IDAO {
 	

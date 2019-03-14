@@ -4,6 +4,10 @@
 package Artikelverwaltung.Modell;
 
 import java.util.List;
+
+import DAO.DAOFactory;
+import DAO.IDAO;
+
 import java.io.IOException;
 
 /**
@@ -14,7 +18,7 @@ public class Database {
 	
 	// Attributes
 	private List<AArticle> articleList;
-	private static final IDAO dao = new DAOText();
+	private static final IDAO dao = DAOFactory.createDAO();
 	
 	
 	/**
