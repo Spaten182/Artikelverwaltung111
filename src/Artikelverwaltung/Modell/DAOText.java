@@ -5,7 +5,6 @@ package Artikelverwaltung.Modell;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -29,10 +28,19 @@ public class DAOText implements IDAO{
 	 * create a dataset
 	 * @throws IOException 
 	 */
-	public static void create(AArticle article) throws IOException {
-		FileWriter fw = new FileWriter(file, true);
-		fw.write(delimiter + article.toString());
-		fw.close();
+	@Override
+	public boolean create(AArticle article) {
+		FileWriter fw;
+		try {
+			fw = new FileWriter(file, true);
+			fw.write(delimiter + article.toString());
+			fw.close();
+			return true;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
 	}
 	
 	/**
@@ -40,12 +48,21 @@ public class DAOText implements IDAO{
 	 * @param inputList
 	 * @throws IOException
 	 */
-	public static void createAll(ArrayList<AArticle> inputList) throws IOException {
-		FileWriter fw = new FileWriter(file, false);
-		for (AArticle aArticle : inputList) {
-			fw.write(delimiter + aArticle.toString());
+	@Override
+	public boolean createAll(List<AArticle> inputList) {
+		FileWriter fw;
+		try {
+			fw = new FileWriter(file, false);
+			for (AArticle aArticle : inputList) {
+				fw.write(delimiter + aArticle.toString());
+			}
+			fw.close();
+			return true;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		fw.close();
+		return false;
 	}
 	
 	
@@ -55,16 +72,16 @@ public class DAOText implements IDAO{
 	 * @throws IOException 
 	 * 
 	 */
-	public static Article read(String articleNr) throws IOException {
+	@Override
+	public Article read(String articleNr) {
 		
-		// Article element = new Article();
-		ArrayList<AArticle> list = new ArrayList<AArticle>();
-		list = DAOText.readAll();
+		List<AArticle> list = this.readAll();
+		
 		for (AArticle aArticle : list) {
 			if(aArticle.getArticleNr().equals(articleNr)) {
 				return (Article) aArticle;
 			}
-		}
+		}	
 		return null;
 	}
 	
@@ -73,19 +90,27 @@ public class DAOText implements IDAO{
 	 * @throws IOException 
 	 * 
 	 */
-	public static ArrayList<AArticle> readAll() throws IOException {
+	@Override
+	public List<AArticle> readAll() {
 		
-		ArrayList<AArticle> list = new ArrayList<AArticle>();
-		Scanner scanner = new Scanner(file);
-		scanner.useDelimiter(delimiter);
-		
-		while(scanner.hasNext()) {
-			String info[] = scanner.next().split("-");
-			list.add(new Article(info[0], info[1], Integer.valueOf(info[2]), Double.valueOf(info[3]), Double.valueOf(info[4])));
+		List<AArticle> list = new ArrayList<AArticle>();
+		try {
+			Scanner scanner = new Scanner(file);
+			scanner.useDelimiter(delimiter);
+			
+			while(scanner.hasNext()) {
+				String info[] = scanner.next().split("-");
+				list.add(new Article(info[0], info[1], Integer.valueOf(info[2]), Double.valueOf(info[3]), Double.valueOf(info[4])));
+			}
+			scanner.close();
+			return list;
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		scanner.close();
 		
-		return list;
+		return null;
 	}
 	
 	/**
@@ -93,11 +118,11 @@ public class DAOText implements IDAO{
 	 * @throws IOException 
 	 * 
 	 */
-	public static boolean update(String articleNr, AArticle newArticle) throws IOException {
+	@Override
+	public boolean update(String articleNr, AArticle newArticle) {
 		
-		ArrayList<AArticle> list = new ArrayList<AArticle>();
+		List<AArticle> list = this.readAll();
 		
-		list = DAOText.readAll();
 		for (AArticle aArticle : list) {
 			if(aArticle.getArticleNr().equals(newArticle.getArticleNr())) {
 				System.out.println("Gewählte Artikelnummer ist bereits vorhanden!");
@@ -113,7 +138,7 @@ public class DAOText implements IDAO{
 			}
 		} // end for
 			 
-		DAOText.createAll(list);
+		this.createAll(list);
 		return true;
 	}
 		
@@ -123,16 +148,16 @@ public class DAOText implements IDAO{
 	 * @throws IOException 
 	 *
 	 */
-	public static boolean delete(String articleNr) throws IOException {
+	@Override
+	public boolean delete(String articleNr) {
 		
-		ArrayList<AArticle> list = new ArrayList<AArticle>();
-		list = DAOText.readAll();
+		List<AArticle> list = this.readAll();
 		
 		for (AArticle aArticle : list) {
 			if(aArticle.getArticleNr().equals(articleNr)) {
 				System.out.println("Gewählte Artikelnummer ist vorhanden!");
 				list.remove(aArticle);
-				DAOText.createAll(list);
+				this.createAll(list);
 				return true;
 			}
 		}
