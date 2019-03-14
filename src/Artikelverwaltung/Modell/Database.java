@@ -3,8 +3,8 @@
  */
 package Artikelverwaltung.Modell;
 
+import java.util.List;
 import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  * @author all
@@ -13,7 +13,8 @@ import java.util.ArrayList;
 public class Database {
 	
 	// Attributes
-	private ArrayList<AArticle> articleList;
+	private List<AArticle> articleList;
+	private static final IDAO dao = new DAOText();
 	
 	
 	/**
@@ -21,10 +22,8 @@ public class Database {
 	 * @return list of all articles
 	 * @throws IOException 
 	 */
-	public ArrayList<AArticle> getArticleList() throws IOException {
-		ArrayList<AArticle> list = new ArrayList<AArticle>();
-		DAOText.readAll();
-		return list;
+	public List<AArticle> getArticleList() throws IOException {
+		return dao.readAll();
 	}
 
 	/**
@@ -34,7 +33,7 @@ public class Database {
 	 * @throws IOException 
 	 */
 	public AArticle getArticle(String articleNr) throws IOException {
-		this.articleList = DAOText.readAll();
+		this.articleList = dao.readAll();
 		
 		for (AArticle aArticle : articleList) {
 			if(aArticle.getArticleNr().equals(articleNr)) {
@@ -50,8 +49,8 @@ public class Database {
 	 * @throws IOException 
 	 */
 	public void addArticle(AArticle newArticle) throws IOException {
-		DAOText.create(newArticle);
-		this.articleList = DAOText.readAll();
+		dao.create(newArticle);
+		this.articleList = dao.readAll();
 	}
 	
 	/**
@@ -60,8 +59,8 @@ public class Database {
 	 * @throws IOException
 	 */
 	public void updateArticle(String articleNr, AArticle newArticle) throws IOException {
-		DAOText.update(articleNr, newArticle);
-		this.articleList = DAOText.readAll();
+		dao.update(articleNr, newArticle);
+		this.articleList = dao.readAll();
 	}
 	
 	/**
@@ -70,8 +69,8 @@ public class Database {
 	 * @throws IOException
 	 */
 	public void deleteArticle(String articleNr) throws IOException {
-		DAOText.delete(articleNr);
-		this.articleList = DAOText.readAll();
+		dao.delete(articleNr);
+		this.articleList = dao.readAll();
 		// TODO Ausgaben in DAO oder hier? 
 	}
 	

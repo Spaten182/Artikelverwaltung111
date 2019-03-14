@@ -49,7 +49,7 @@ public class DAOText implements IDAO{
 	 * @throws IOException
 	 */
 	@Override
-	public boolean createAll(ArrayList<AArticle> inputList) {
+	public boolean createAll(List<AArticle> inputList) {
 		FileWriter fw;
 		try {
 			fw = new FileWriter(file, false);
@@ -75,9 +75,8 @@ public class DAOText implements IDAO{
 	@Override
 	public Article read(String articleNr) {
 		
-		// Article element = new Article();
-		ArrayList<AArticle> list = new ArrayList<AArticle>();
-		list = this.readAll();
+		List<AArticle> list = this.readAll();
+		
 		for (AArticle aArticle : list) {
 			if(aArticle.getArticleNr().equals(articleNr)) {
 				return (Article) aArticle;
@@ -92,9 +91,9 @@ public class DAOText implements IDAO{
 	 * 
 	 */
 	@Override
-	public ArrayList<AArticle> readAll() {
+	public List<AArticle> readAll() {
 		
-		ArrayList<AArticle> list = new ArrayList<AArticle>();
+		List<AArticle> list = new ArrayList<AArticle>();
 		try {
 			Scanner scanner = new Scanner(file);
 			scanner.useDelimiter(delimiter);
@@ -122,9 +121,8 @@ public class DAOText implements IDAO{
 	@Override
 	public boolean update(String articleNr, AArticle newArticle) {
 		
-		ArrayList<AArticle> list = new ArrayList<AArticle>();
+		List<AArticle> list = this.readAll();
 		
-		list = this.readAll();
 		for (AArticle aArticle : list) {
 			if(aArticle.getArticleNr().equals(newArticle.getArticleNr())) {
 				System.out.println("Gewählte Artikelnummer ist bereits vorhanden!");
@@ -153,8 +151,7 @@ public class DAOText implements IDAO{
 	@Override
 	public boolean delete(String articleNr) {
 		
-		ArrayList<AArticle> list = new ArrayList<AArticle>();
-		list = this.readAll();
+		List<AArticle> list = this.readAll();
 		
 		for (AArticle aArticle : list) {
 			if(aArticle.getArticleNr().equals(articleNr)) {

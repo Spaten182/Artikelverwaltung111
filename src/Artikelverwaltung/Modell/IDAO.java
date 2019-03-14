@@ -1,6 +1,6 @@
 package Artikelverwaltung.Modell;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface IDAO {
 	
@@ -16,7 +16,7 @@ public interface IDAO {
 	 * @param inputList
 	 * @return
 	 */
-	boolean createAll(ArrayList<AArticle> inputList);
+	boolean createAll(List<AArticle> inputList);
 	
 	/**
 	 * Reads the DB and returns one article
@@ -29,7 +29,7 @@ public interface IDAO {
 	 * Reads all elements from DB
 	 * @return
 	 */
-	ArrayList<AArticle> readAll();
+	List<AArticle> readAll();
 	
 	/**
 	 * Changes on entry in DB

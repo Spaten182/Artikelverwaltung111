@@ -4,7 +4,7 @@
 package Artikelverwaltung.Application;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
 import Artikelverwaltung.Modell.*;
 
@@ -19,15 +19,17 @@ public class Main {
 	 * @throws IOException 
 	 */
 	public static void main(String[] args) throws IOException {
-		AArticle art = new Article("4", "4", 4, 6.0, 6.0);
-		System.out.println("---------- Test ------------\n");
-		ArrayList<AArticle> list = new ArrayList<AArticle>();
 		
-		list = DAOText.readAll();
+		IDAO dao = new DAOText();
+		AArticle art = new Article("4", "4", 4, 6.0, 6.0);
+		
+		System.out.println("---------- Test ------------\n");
+		
+		List<AArticle> list = dao.readAll();
 		listToConsole(list);	
 	}
 	
-	public static void listToConsole(ArrayList<AArticle> list) {
+	public static void listToConsole(List<AArticle> list) {
 		
 		for(int i = 0; i < list.size(); i++) {
 			System.out.print(list.get(i).getArticleNr() + "; ");
