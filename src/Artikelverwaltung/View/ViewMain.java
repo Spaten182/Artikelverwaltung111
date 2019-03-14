@@ -8,15 +8,16 @@ package Artikelverwaltung.View;
 
 /**
  *
- * @author nikla
+ * @author Nils
  */
-public class View extends javax.swing.JFrame {
+public class ViewMain extends javax.swing.JFrame {
 
     /**
      * Creates new form View
      */
-    public View() {
+    public ViewMain() {
         initComponents();
+        mainController mainCon = new MainController();
     }
 
     /**
@@ -57,7 +58,7 @@ public class View extends javax.swing.JFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, true, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

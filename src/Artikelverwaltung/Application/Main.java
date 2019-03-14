@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.List;
 
 import Artikelverwaltung.Modell.*;
-import Artikelverwaltung.View.View;
+import Artikelverwaltung.View.ViewMain;
 
 /**
  * @author nils743
@@ -23,13 +23,10 @@ public class Main {
 
 	public static void main(String[] args) throws IOException {
 		
-		IDAO dao = new DAOText();
-
 		AArticle art = new Article("4", "4", 4, 6.0, 6.0);
 		
-		System.out.println("---------- Test ------------\n");
-		
-		listToConsole(list);	
+		ViewMain mainView = new ViewMain();
+			
 	}
 	
 	public static void listToConsole(List<AArticle> list) {
