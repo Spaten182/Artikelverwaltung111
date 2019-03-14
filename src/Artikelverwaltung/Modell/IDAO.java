@@ -1,23 +1,49 @@
 package Artikelverwaltung.Modell;
 
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public interface IDAO {
 	
-	public void create(AArticle article) throws IOException;
+	/**
+	 * creates on entry
+	 * @param article
+	 * @return true/false
+	 */
+	boolean create(AArticle article);
 
-	public static void createAll(ArrayList<AArticle> inputList) throws IOException 
+	/**
+	 * creates the new DB
+	 * @param inputList
+	 * @return
+	 */
+	boolean createAll(ArrayList<AArticle> inputList);
 	
-	public static Article read(String articleNr) throws IOException 
+	/**
+	 * Reads the DB and returns one article
+	 * @param articleNr
+	 * @return
+	 */
+	Article read(String articleNr);
 	
-	public static ArrayList<AArticle> readAll() throws IOException 
+	/**
+	 * Reads all elements from DB
+	 * @return
+	 */
+	ArrayList<AArticle> readAll();
 	
-	public static boolean update(String articleNr, AArticle newArticle) throws IOException
-		
+	/**
+	 * Changes on entry in DB
+	 * @param articleNr
+	 * @param newArticle
+	 * @return
+	 */
+	boolean update(String articleNr, AArticle newArticle);
 	
-	public static boolean delete(String articleNr) throws IOException 
+	/**
+	 * Deletes on entry in DB
+	 * @param articleNr
+	 * @return
+	 */
+	boolean delete(String articleNr);
 	
 }
