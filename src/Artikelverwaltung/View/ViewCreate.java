@@ -5,6 +5,8 @@ package Artikelverwaltung.View;
  * and open the template in the editor.
  */
 
+import Artikelverwaltung.Controller.ControllerCreate;
+
 /**
  *
  * @author nikla
@@ -15,7 +17,9 @@ public class ViewCreate extends javax.swing.JFrame {
      * Creates new form EditWindow
      */
     public ViewCreate() {
-        initComponents();
+        ControllerCreate conCreate = new ControllerCreate(this);
+    	initComponents();
+        
     }
 
     /**

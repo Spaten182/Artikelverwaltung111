@@ -5,6 +5,8 @@ package Artikelverwaltung.View;
  * and open the template in the editor.
  */
 
+import Artikelverwaltung.Controller.ControllerView;
+
 /**
  *
  * @author nikla
@@ -15,7 +17,9 @@ public class ViewEdit extends javax.swing.JFrame {
      * Creates new form EditWindow
      */
     public ViewEdit() {
-        initComponents();
+        ControllerView conView = new ControllerView(this);
+    	initComponents();
+        
     }
 
     /**

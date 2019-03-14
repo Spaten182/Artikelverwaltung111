@@ -1,9 +1,11 @@
 package Artikelverwaltung.Controller;
 
+import java.awt.event.ActionListener;
+
 import javax.swing.JFrame;
 
 public class MainController extends AController {
-
+	
 	/**
 	 * Creates a MainView
 	 * @param view
@@ -12,6 +14,9 @@ public class MainController extends AController {
 		super(view);
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+	
 	
 	
 }
