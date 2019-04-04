@@ -7,22 +7,25 @@ import javax.swing.JFrame;
 
 import Artikelverwaltung.Modell.AArticle;
 import Artikelverwaltung.View.ViewCreate;
+import Artikelverwaltung.View.ViewMain;
 import DAO.IDAO;
 
 public class MainController extends AController {
 	
+	private ViewMain viewMain;
 	/**
 	 * Creates a MainView
 	 * @param view
 	 */
-	public MainController(JFrame view) {
+	public MainController(JFrame view, ViewMain viewMain) {
 		super(view);
 		// TODO Auto-generated constructor stub
+		this.viewMain = viewMain;
 	}
 	
 
 	public void createButtonClicked(ActionEvent Ae) {
-		JFrame createView = new ViewCreate();
+		JFrame createView = new ViewCreate(this.viewMain);
 	}
 	
 	

@@ -28,7 +28,7 @@ public class ViewMain extends javax.swing.JFrame implements ActionListener{
      * Creates new form View
      */
     public ViewMain() {
-    	this.mainCon = new MainController(this);
+    	this.mainCon = new MainController(this, this);
         initComponents();
     }
 
@@ -73,7 +73,7 @@ public class ViewMain extends javax.swing.JFrame implements ActionListener{
         createButton.addActionListener(new ActionListener() {	
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				mainCon.createButtonClicked(e);		
+				mainCon.createButtonClicked(e);	
 			}
 		});
 
@@ -102,7 +102,20 @@ public class ViewMain extends javax.swing.JFrame implements ActionListener{
                 {null, null, null, null, null},
                 {null, null, null, null, null},
                 {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
                 
             },
             new String [] {
@@ -170,7 +183,7 @@ public class ViewMain extends javax.swing.JFrame implements ActionListener{
       
     }// </editor-fold>//GEN-END:initComponents
 
-    private void refreshTable() {
+    public void refreshTable() {
 
 		for(int i = 0; i < this.jTable1.getRowCount(); i++) {
 			jTable1.setValueAt("", i, 0);

@@ -5,6 +5,11 @@ package Artikelverwaltung.View;
  * and open the template in the editor.
  */
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JFrame;
+
 import Artikelverwaltung.Controller.ControllerCreate;
 
 /**
@@ -13,11 +18,15 @@ import Artikelverwaltung.Controller.ControllerCreate;
  */
 public class ViewCreate extends javax.swing.JFrame {
 
+	private ControllerCreate conCreate;
+	private ViewMain mainView;
+	
     /**
      * Creates new form EditWindow
      */
-    public ViewCreate() {
-        ControllerCreate conCreate = new ControllerCreate(this);
+    public ViewCreate(ViewMain mainView) {
+        this.conCreate = new ControllerCreate(this);
+        this.mainView = mainView;
     	initComponents();
         
     }
@@ -45,16 +54,30 @@ public class ViewCreate extends javax.swing.JFrame {
         priceBuyLabel = new javax.swing.JLabel();
         priceSellLabel = new javax.swing.JLabel();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         confirmButton.setText("Confirm");
+        confirmButton.addActionListener(new ActionListener() {	
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				conCreate.confirmButtonClicked(e,
+												artNrField.getText(),
+												nameField.getText(),
+												Integer.parseInt(amountField.getText()),
+												Double.parseDouble(priceBuyField.getText()),
+												Double.parseDouble(priceSellField.getText()),
+												mainView);
+			}
+		});
 
         cancelButton.setText("Cancel");
-
-        nameField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nameFieldActionPerformed(evt);
-            }
-        });
+        cancelButton.addActionListener(new ActionListener() {	
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				conCreate.cancelButtonClicked(e);		
+			}
+		});
+        
 
         articleNrLabel.setText("ArticleNR:");
 
