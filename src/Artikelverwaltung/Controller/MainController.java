@@ -19,6 +19,7 @@ public class MainController extends AController {
 		// TODO Auto-generated constructor stub
 	}
 	
+<<<<<<< HEAD
 	public static void createButtonClicked(ActionEvent Ae) {
 		JFrame createView = new ViewCreate();
 	}
@@ -33,6 +34,13 @@ public class MainController extends AController {
 		
 	}
 	
+=======
+	 public void actionPerformed (ActionEvent ae){
+		 
+	 
+	 
+	 }
+>>>>>>> a301c4bb44c53a0fe010dc4b2b8f1f58893a5d27
 	
 	public static void deleteButtonClicked(ActionEvent Ae) {
 		
