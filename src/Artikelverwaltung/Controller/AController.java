@@ -9,17 +9,14 @@ import DAO.IDAO;
 public abstract class AController {
 
 	// Attributes
-	private javax.swing.JFrame ownView;
-	private IDAO dao;
+	protected javax.swing.JFrame ownView;
+	protected IDAO dao;
 
 	public AController(javax.swing.JFrame view) {
 		this.ownView = view;
 		this.dao = DAOFactory.createDAO();
 	}
-	
-	public List<AArticle> getDBData() {
-		return dao.readAll(); 
-	}
+
 	
 	/**
 	 * 

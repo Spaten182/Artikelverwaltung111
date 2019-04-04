@@ -45,7 +45,6 @@ public class ViewCreate extends javax.swing.JFrame {
         priceBuyLabel = new javax.swing.JLabel();
         priceSellLabel = new javax.swing.JLabel();
 
-        //setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         confirmButton.setText("Confirm");
 

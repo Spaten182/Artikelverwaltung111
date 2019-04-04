@@ -56,7 +56,7 @@ public class ViewMain extends javax.swing.JFrame implements ActionListener{
         editButton.addActionListener(new ActionListener() {	
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				MainController.editButtonClicked(e);		
+				mainCon.editButtonClicked(e);		
 			}
 		});
 
@@ -64,7 +64,8 @@ public class ViewMain extends javax.swing.JFrame implements ActionListener{
         searchButton.addActionListener(new ActionListener() {	
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				MainController.searchButtonClicked(e);		
+				// mainCon.searchButtonClicked(e);	
+				searchTable(searchField.getText());
 			}
 		});
 
@@ -72,7 +73,7 @@ public class ViewMain extends javax.swing.JFrame implements ActionListener{
         createButton.addActionListener(new ActionListener() {	
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				MainController.createButtonClicked(e);		
+				mainCon.createButtonClicked(e);		
 			}
 		});
 
@@ -80,19 +81,29 @@ public class ViewMain extends javax.swing.JFrame implements ActionListener{
         deleteButton.addActionListener(new ActionListener() {	
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				MainController.deleteButtonClicked(e);		
+				int row = jTable1.getSelectedRow();
+				System.out.println(row);
+				try {
+					String articleNr = jTable1.getValueAt(row, 0).toString();
+					mainCon.deleteButtonClicked(e, articleNr);
+					refreshTable();
+				}
+				catch(Exception ex)
+				{
+					System.out.println("Lern zu klicken.");
+				}
 			}
 		});
 
-        IDAO dao = DAO.DAOFactory.createDAO();
-        ArrayList<AArticle> list = (ArrayList<AArticle>) dao.readAll();
         
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+            	
                 {null, null, null, null, null},
                 {null, null, null, null, null},
                 {null, null, null, null, null},
                 {null, null, null, null, null}
+                
             },
             new String [] {
                 "ArticleNR", "Name", "Amount", "PriceBuy", "PriceSell"
@@ -112,6 +123,7 @@ public class ViewMain extends javax.swing.JFrame implements ActionListener{
         jScrollPane1.setViewportView(jTable1);
 
         editButton.setText("Edit");
+        
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -155,14 +167,21 @@ public class ViewMain extends javax.swing.JFrame implements ActionListener{
         );
 
         pack();
+      
     }// </editor-fold>//GEN-END:initComponents
 
-	private void refreshTable() {
-		
-		jTable1.removeAll();
+    private void refreshTable() {
+
+		for(int i = 0; i < this.jTable1.getRowCount(); i++) {
+			jTable1.setValueAt("", i, 0);
+			jTable1.setValueAt("", i, 1);
+			jTable1.setValueAt("", i, 2);
+			jTable1.setValueAt("", i, 3);
+			jTable1.setValueAt("", i, 4);
+		}
 		
 		int i = 0;
-        for (AArticle element : this.mainCon.getDBData()) {
+        for (AArticle element : this.mainCon.getData()) {
         	jTable1.setValueAt(element.getArticleNr(), i, 0);
         	jTable1.setValueAt(element.getName(), i, 1);
         	jTable1.setValueAt(element.getAmount(), i, 2);
@@ -171,6 +190,23 @@ public class ViewMain extends javax.swing.JFrame implements ActionListener{
         	i++;
 		}
 	}
+    
+    
+    private void searchTable(String searchText) {
+    	
+    	jTable1.clearSelection();
+    	
+		for(int i = 0; i < this.jTable1.getRowCount(); i++) {
+			String result = jTable1.getValueAt(i, 0).toString();
+			
+			if(result.contains(searchText)) {
+				jTable1.setRowSelectionInterval(i, i);
+				break;
+			}			
+		}
+		System.out.println("Leider ist die McFlurry-Maschine gerade kaputt.");
+	}
+	
 
     /**
      * @param args the command line arguments
