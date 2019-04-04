@@ -1,5 +1,6 @@
 package Artikelverwaltung.Controller;
 
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
@@ -15,7 +16,11 @@ public class MainController extends AController {
 		// TODO Auto-generated constructor stub
 	}
 	
-	
+	 public void actionPerformed (ActionEvent ae){
+		 
+	 
+	 
+	 }
 	
 	
 	
