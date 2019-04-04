@@ -1,7 +1,14 @@
 package Artikelverwaltung.View;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
+import Artikelverwaltung.Controller.Controller;
 import Artikelverwaltung.Controller.MainController;
 import Artikelverwaltung.Modell.AArticle;
+import DAO.DAOText;
+import DAO.IDAO;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -13,7 +20,7 @@ import Artikelverwaltung.Modell.AArticle;
  *
  * @author Nils
  */
-public class ViewMain extends javax.swing.JFrame {
+public class ViewMain extends javax.swing.JFrame implements ActionListener{
 
 	private MainController mainCon;
 	
@@ -41,16 +48,45 @@ public class ViewMain extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         searchField = new javax.swing.JTextField();
-        editButton = new javax.swing.JButton();
+        
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        
+        editButton = new javax.swing.JButton();
+        editButton.addActionListener(new ActionListener() {	
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				MainController.editButtonClicked(e);		
+			}
+		});
 
         searchButton.setText("Search");
+        searchButton.addActionListener(new ActionListener() {	
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				MainController.searchButtonClicked(e);		
+			}
+		});
 
         createButton.setText("Create");
+        createButton.addActionListener(new ActionListener() {	
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				MainController.createButtonClicked(e);		
+			}
+		});
 
         deleteButton.setText("Delete");
+        deleteButton.addActionListener(new ActionListener() {	
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				MainController.deleteButtonClicked(e);		
+			}
+		});
 
+        IDAO dao = DAO.DAOFactory.createDAO();
+        ArrayList<AArticle> list = (ArrayList<AArticle>) dao.readAll();
+        
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -140,7 +176,6 @@ public class ViewMain extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton createButton;
     private javax.swing.JButton deleteButton;
@@ -150,4 +185,12 @@ public class ViewMain extends javax.swing.JFrame {
     private javax.swing.JButton searchButton;
     private javax.swing.JTextField searchField;
     // End of variables declaration//GEN-END:variables
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
 }
